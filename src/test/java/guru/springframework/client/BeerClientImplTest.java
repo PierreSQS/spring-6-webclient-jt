@@ -16,8 +16,10 @@ class BeerClientImplTest {
     }
 
     @Test
-    void listBeer() {
+    void listBeer() throws InterruptedException {
         webClient.listBeer().subscribe(System.out::println);
+
+        Thread.sleep(1000L);
 
     }
 }
