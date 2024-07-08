@@ -9,7 +9,7 @@ import java.util.Map;
 public interface BeerClient {
     Flux<String> listBeer();
 
-    Flux<Map> listBeerMap();
+    Flux<Map<String,String>> listBeerMap();
 
     Flux<JsonNode> listBeersJsonNode();
 }
