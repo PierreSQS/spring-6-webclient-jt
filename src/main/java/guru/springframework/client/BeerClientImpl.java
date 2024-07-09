@@ -19,8 +19,8 @@ public class BeerClientImpl implements BeerClient {
 
     private final WebClient webClient;
 
-    public BeerClientImpl(WebClient.Builder webBuilder) {
-        this.webClient = webBuilder.baseUrl("http://localhost:8080").build();
+    public BeerClientImpl(WebClient.Builder weClientBuilder) {
+        this.webClient = weClientBuilder.build();
     }
 
     @Override
