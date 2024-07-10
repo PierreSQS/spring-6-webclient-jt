@@ -25,6 +25,13 @@ public class BeerClientImpl implements BeerClient {
         this.webClient = weClientBuilder.build();
     }
 
+    @Override
+    public Flux<BeerDTO> getBeerByStyle(String beerStyle) {
+        return webClient.get().uri(uriBuilder ->
+                uriBuilder.path(API_V3_BEER_PATH).queryParam("beerStyle", beerStyle).build())
+                .retrieve()
+                .bodyToFlux(BeerDTO.class);
+    }
 
     @Override
     public Mono<BeerDTO> getBeerByID(String uuid) {
