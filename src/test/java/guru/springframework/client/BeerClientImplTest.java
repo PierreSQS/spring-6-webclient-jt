@@ -1,10 +1,12 @@
 package guru.springframework.client;
 
+import guru.springframework.model.BeerDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.awaitility.Awaitility.await;
@@ -17,6 +19,28 @@ class BeerClientImplTest {
 
     @BeforeEach
     void setUp() {
+    }
+
+    @Test
+    void testCreateNewBeer() {
+
+        AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
+        BeerDTO beerDTO = BeerDTO.builder()
+                .beerName("33 Export")
+                .beerStyle("IPA")
+                .price(new BigDecimal("10.44"))
+                .quantityOnHand(200)
+                .upc("123456")
+                .build();
+
+        webClient.createNewBeer(beerDTO).subscribe(beerDTO1 ->
+        {
+            System.out.println(beerDTO1.toString());
+            atomicBoolean.set(true);
+        } );
+
+        await().untilTrue(atomicBoolean);
     }
 
     @Test
