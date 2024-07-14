@@ -8,6 +8,9 @@ import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
+/**
+ *  * Modified by Pierrot on 14-07-2024.
+ */
 public interface BeerClient {
     Flux<String> listBeer();
 
@@ -22,4 +25,6 @@ public interface BeerClient {
     Flux<BeerDTO> getBeerByStyle(String beerStyle);
 
     Mono<BeerDTO> createNewBeer(BeerDTO beerDTO);
+
+    Mono<BeerDTO> updateBeer(BeerDTO beerDTO);
 }

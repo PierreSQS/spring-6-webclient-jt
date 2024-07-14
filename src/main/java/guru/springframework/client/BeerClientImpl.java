@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Modified by Pierrot on 10-07-2024.
+ * Modified by Pierrot on 14-07-2024.
  */
 @Service
 public class BeerClientImpl implements BeerClient {
@@ -24,6 +24,16 @@ public class BeerClientImpl implements BeerClient {
 
     public BeerClientImpl(WebClient.Builder weClientBuilder) {
         this.webClient = weClientBuilder.build();
+    }
+
+    @Override
+    public Mono<BeerDTO> updateBeer(BeerDTO beerDTO) {
+        return webClient.put()
+                .uri(uriBuilder -> uriBuilder.path(API_V3_BEER_PATH_BY_ID).build(beerDTO.getId()))
+                .body(Mono.just(beerDTO), BeerDTO.class)
+                .retrieve()
+                .toBodilessEntity()
+                .flatMap(voidResponseEntity -> getBeerByID(beerDTO.getId()));
     }
 
     @Override
